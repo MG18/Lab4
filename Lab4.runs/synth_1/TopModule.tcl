@@ -88,6 +88,8 @@ set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_verilog -library xil_defaultlib {
+  C:/Users/mehme/Documents/Lab4/Lab4.srcs/sources_1/new/LeftModule.v
+  C:/Users/mehme/Documents/Lab4/Lab4.srcs/sources_1/new/RightModule.v
   C:/Users/mehme/Documents/Lab4/Lab4.srcs/sources_1/new/StateRegister.v
   C:/Users/mehme/Documents/Lab4/Lab4.srcs/sources_1/new/clk_div.v
   C:/Users/mehme/Documents/Lab4/Lab4.srcs/sources_1/new/TopModule.v

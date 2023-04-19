@@ -1,7 +1,7 @@
 Copyright 1986-2023 Xilinx, Inc. All Rights Reserved.
 ------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2022.2.2 (win64) Build 3788238 Tue Feb 21 20:00:34 MST 2023
-| Date         : Wed Apr 19 17:52:20 2023
+| Date         : Wed Apr 19 19:08:31 2023
 | Host         : MG running 64-bit major release  (build 9200)
 | Command      : report_drc -file TopModule_drc_opted.rpt -pb TopModule_drc_opted.pb -rpx TopModule_drc_opted.rpx
 | Design       : TopModule
@@ -49,12 +49,17 @@ Related violations: <none>
 
 PLHOLDVIO-2#1 Warning
 Non-Optimal connections which could lead to hold violations  
-A LUT nolabel_line26/FSM_onehot_state[3]_i_1 is driving clock pin of 5 cells. This could lead to large hold time violations. Involved cells are:
-nolabel_line27/FSM_onehot_state_reg[0],
-nolabel_line27/FSM_onehot_state_reg[1],
-nolabel_line27/FSM_onehot_state_reg[2],
-nolabel_line27/FSM_onehot_state_reg[3]
-nolabel_line27/FSM_onehot_state_reg[3]_lopt_replica
+A LUT nolabel_line26/FSM_onehot_state[3]_i_1 is driving clock pin of 10 cells. This could lead to large hold time violations. Involved cells are:
+nolabel_line27/nolabel_line27/FSM_onehot_state_reg[0],
+nolabel_line27/nolabel_line27/FSM_onehot_state_reg[1],
+nolabel_line27/nolabel_line27/FSM_onehot_state_reg[2],
+nolabel_line27/nolabel_line27/FSM_onehot_state_reg[3],
+nolabel_line27/nolabel_line27/FSM_onehot_state_reg[3]_lopt_replica,
+nolabel_line27/nolabel_line28/FSM_onehot_state_reg[0],
+nolabel_line27/nolabel_line28/FSM_onehot_state_reg[1],
+nolabel_line27/nolabel_line28/FSM_onehot_state_reg[2],
+nolabel_line27/nolabel_line28/FSM_onehot_state_reg[3]
+nolabel_line27/nolabel_line28/FSM_onehot_state_reg[3]_lopt_replica
 Related violations: <none>
 
 
