@@ -20,13 +20,15 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module LeftModule(input clk, input [1:0] state_n, input left, input reset, output [1:0] state_p,output LA,output LB,output LC);
+module LeftModule(input clkdiv, input clkpwm,  input [1:0] state_n, input left, input reset, output [1:0] state_p,output LA,output LB,output LC);
 
 reg[1:0] state;
 reg LA_w,LB_w,LC_w;
+wire pwmwire;
 
 
-always @(posedge clk, posedge reset)
+
+always @(posedge clkdiv, posedge reset)
 begin
 state <= state_n;
 if (reset)
@@ -56,19 +58,22 @@ begin
            LC_w <= 0; 
            end 
      2'b01: begin
-           LA_w <= 1;
+           PWM(clkpwm, 3, reset, pwmwire);
+           LA_w <= pwmwire;
            LB_w <= 0; 
            LC_w <= 0; 
            end 
      2'b10: begin
-           LA_w <= 1;
-           LB_w <= 1; 
+           PWM(clkpwm, 2, reset, pwmwire);
+           LA_w <= pwmwire;
+           LB_w <= pwmwire; 
            LC_w <= 0; 
            end
      2'b11: begin
-           LA_w <= 1;
-           LB_w <= 1; 
-           LC_w <= 1; 
+           PWM(clkpwm, 1, reset, pwmwire);
+           LA_w <= pwmwire;
+           LB_w <= pwmwire; 
+           LC_w <= pwmwire; 
            end
            
     endcase

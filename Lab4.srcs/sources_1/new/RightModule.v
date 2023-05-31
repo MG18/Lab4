@@ -20,13 +20,14 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module RightModule(input clk, input [1:0] state_n, input right, input reset, output [1:0] state_p,output RA,output RB,output RC);
+module RightModule(input clkdiv,input clkpwm,  input [1:0] state_n, input right, input reset, output [1:0] state_p,output RA,output RB,output RC);
 
 reg[1:0] state;
 reg RA_w,RB_w,RC_w;
+wire pwmwire;
 
 
-always @(posedge clk, posedge reset)
+always @(posedge clkdiv, posedge reset)
 begin
 state <= state_n;
 if (reset)
@@ -56,19 +57,22 @@ begin
            RC_w <= 0; 
            end 
      2'b01: begin
-           RA_w <= 1;
+           Pwm(clkpwm, 3, reset, pwmwire);
+           RA_w <= pwmwire;
            RB_w <= 0; 
            RC_w <= 0; 
            end 
      2'b10: begin
-           RA_w <= 1;
-           RB_w <= 1; 
+           Pwm(clkpwm, 2, reset, pwmwire);
+           RA_w <= pwmwire;
+           RB_w <= pwmwire; 
            RC_w <= 0; 
            end
      2'b11: begin
-           RA_w <= 1;
-           RB_w <= 1; 
-           RC_w <= 1; 
+           Pwm(clkpwm, 1, reset, pwmwire);
+           RA_w <= pwmwire;
+           RB_w <= pwmwire; 
+           RC_w <= pwmwire; 
            end
            
     endcase

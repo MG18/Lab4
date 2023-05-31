@@ -115,7 +115,6 @@ proc step_failed { step } {
 OPTRACE "impl_1" END { }
 }
 
-set_msg_config -id {Common 17-41} -limit 10000000
 
 OPTRACE "impl_1" START { ROLLUP_1 }
 OPTRACE "Phase: Init Design" START { ROLLUP_AUTO }
@@ -124,7 +123,7 @@ set ACTIVE_STEP init_design
 set rc [catch {
   create_msg_db init_design.pb
   set_param chipscope.maxJobs 4
-  set_param xicom.use_bs_reader 1
+  set_param runs.launchOptions { -jobs 8  }
 OPTRACE "create in-memory project" START { }
   create_project -in_memory -part xc7a35tcpg236-1
   set_property design_mode GateLvl [current_fileset]
@@ -174,12 +173,12 @@ OPTRACE "opt_design" START { }
 OPTRACE "opt_design" END { }
 OPTRACE "read constraints: opt_design_post" START { }
 OPTRACE "read constraints: opt_design_post" END { }
-OPTRACE "Opt Design: write_checkpoint" START { CHECKPOINT }
-  write_checkpoint -force TopModule_opt.dcp
-OPTRACE "Opt Design: write_checkpoint" END { }
 OPTRACE "opt_design reports" START { REPORT }
   create_report "impl_1_opt_report_drc_0" "report_drc -file TopModule_drc_opted.rpt -pb TopModule_drc_opted.pb -rpx TopModule_drc_opted.rpx"
 OPTRACE "opt_design reports" END { }
+OPTRACE "Opt Design: write_checkpoint" START { CHECKPOINT }
+  write_checkpoint -force TopModule_opt.dcp
+OPTRACE "Opt Design: write_checkpoint" END { }
   close_msg_db -file opt_design.pb
 } RESULT]
 if {$rc} {
@@ -208,14 +207,14 @@ OPTRACE "place_design" START { }
 OPTRACE "place_design" END { }
 OPTRACE "read constraints: place_design_post" START { }
 OPTRACE "read constraints: place_design_post" END { }
-OPTRACE "Place Design: write_checkpoint" START { CHECKPOINT }
-  write_checkpoint -force TopModule_placed.dcp
-OPTRACE "Place Design: write_checkpoint" END { }
 OPTRACE "place_design reports" START { REPORT }
   create_report "impl_1_place_report_io_0" "report_io -file TopModule_io_placed.rpt"
   create_report "impl_1_place_report_utilization_0" "report_utilization -file TopModule_utilization_placed.rpt -pb TopModule_utilization_placed.pb"
   create_report "impl_1_place_report_control_sets_0" "report_control_sets -verbose -file TopModule_control_sets_placed.rpt"
 OPTRACE "place_design reports" END { }
+OPTRACE "Place Design: write_checkpoint" START { CHECKPOINT }
+  write_checkpoint -force TopModule_placed.dcp
+OPTRACE "Place Design: write_checkpoint" END { }
   close_msg_db -file place_design.pb
 } RESULT]
 if {$rc} {
@@ -239,11 +238,11 @@ OPTRACE "phys_opt_design" START { }
 OPTRACE "phys_opt_design" END { }
 OPTRACE "read constraints: phys_opt_design_post" START { }
 OPTRACE "read constraints: phys_opt_design_post" END { }
+OPTRACE "phys_opt_design report" START { REPORT }
+OPTRACE "phys_opt_design report" END { }
 OPTRACE "Post-Place Phys Opt Design: write_checkpoint" START { CHECKPOINT }
   write_checkpoint -force TopModule_physopt.dcp
 OPTRACE "Post-Place Phys Opt Design: write_checkpoint" END { }
-OPTRACE "phys_opt_design report" START { REPORT }
-OPTRACE "phys_opt_design report" END { }
   close_msg_db -file phys_opt_design.pb
 } RESULT]
 if {$rc} {
@@ -267,9 +266,6 @@ OPTRACE "route_design" START { }
 OPTRACE "route_design" END { }
 OPTRACE "read constraints: route_design_post" START { }
 OPTRACE "read constraints: route_design_post" END { }
-OPTRACE "Route Design: write_checkpoint" START { CHECKPOINT }
-  write_checkpoint -force TopModule_routed.dcp
-OPTRACE "Route Design: write_checkpoint" END { }
 OPTRACE "route_design reports" START { REPORT }
   create_report "impl_1_route_report_drc_0" "report_drc -file TopModule_drc_routed.rpt -pb TopModule_drc_routed.pb -rpx TopModule_drc_routed.rpx"
   create_report "impl_1_route_report_methodology_0" "report_methodology -file TopModule_methodology_drc_routed.rpt -pb TopModule_methodology_drc_routed.pb -rpx TopModule_methodology_drc_routed.rpx"
@@ -280,6 +276,9 @@ OPTRACE "route_design reports" START { REPORT }
   create_report "impl_1_route_report_clock_utilization_0" "report_clock_utilization -file TopModule_clock_utilization_routed.rpt"
   create_report "impl_1_route_report_bus_skew_0" "report_bus_skew -warn_on_violation -file TopModule_bus_skew_routed.rpt -pb TopModule_bus_skew_routed.pb -rpx TopModule_bus_skew_routed.rpx"
 OPTRACE "route_design reports" END { }
+OPTRACE "Route Design: write_checkpoint" START { CHECKPOINT }
+  write_checkpoint -force TopModule_routed.dcp
+OPTRACE "Route Design: write_checkpoint" END { }
 OPTRACE "route_design misc" START { }
   close_msg_db -file route_design.pb
 } RESULT]

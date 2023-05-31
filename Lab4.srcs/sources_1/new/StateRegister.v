@@ -20,11 +20,11 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module StateRegister(input clk, input [2:0] state_n, input left, input right, input reset, output [2:0] state_p,output RA,output RB,output RC,output LA,output LB,output LC);
+module StateRegister(input clkdiv,input clkpwm, input [2:0] state_n, input left, input right, input reset, output [2:0] state_p,output RA,output RB,output RC,output LA,output LB,output LC);
 
 wire right_w, left_w;
 
-RightModule(clk, right_w, right, reset, right_w, RA, RB, RC);
-LeftModule(clk, left_w, left, reset, left_w, LA, LB, LC);
+RightModule(clkdiv,clkpwm, right_w, right, reset, right_w, RA, RB, RC);
+LeftModule(clkdiv,clkpwm, left_w, left, reset, left_w, LA, LB, LC);
 
 endmodule

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="impl_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1681924058">
+<GenRun Id="impl_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1685540688">
   <File Type="ROUTE-PWR" Name="TopModule_power_routed.rpt"/>
   <File Type="PA-TCL" Name="TopModule.tcl"/>
+  <File Type="ROUTE-PWR-SUM" Name="TopModule_power_summary_routed.pb"/>
+  <File Type="REPORTS-TCL" Name="TopModule_reports.tcl"/>
+  <File Type="OPT-RQA-PB" Name="TopModule_rqa_opted.pb"/>
   <File Type="BITSTR-MMI" Name="TopModule.mmi"/>
   <File Type="OPT-METHODOLOGY-DRC" Name="TopModule_methodology_drc_opted.rpt"/>
   <File Type="INIT-TIMING" Name="TopModule_timing_summary_init.rpt"/>
-  <File Type="ROUTE-PWR-SUM" Name="TopModule_power_summary_routed.pb"/>
-  <File Type="REPORTS-TCL" Name="TopModule_reports.tcl"/>
   <File Type="OPT-TIMING" Name="TopModule_timing_summary_opted.rpt"/>
   <File Type="OPT-DCP" Name="TopModule_opt.dcp"/>
   <File Type="OPT-DRC" Name="TopModule_drc_opted.rpt"/>
@@ -24,6 +25,8 @@
   <File Type="PLACE-PRE-SIMILARITY" Name="TopModule_incremental_reuse_pre_placed.rpt"/>
   <File Type="BG-BIN" Name="TopModule.bin"/>
   <File Type="PLACE-TIMING" Name="TopModule_timing_summary_placed.rpt"/>
+  <File Type="ROUTE-PWR-RPX" Name="TopModule_power_routed.rpx"/>
+  <File Type="PLACE-RQA-PB" Name="TopModule_rqa_placed.pb"/>
   <File Type="POSTPLACE-PWROPT-DCP" Name="TopModule_postplace_pwropt.dcp"/>
   <File Type="BITSTR-MSK" Name="TopModule.msk"/>
   <File Type="POSTPLACE-PWROPT-TIMING" Name="TopModule_timing_summary_postplace_pwropted.rpt"/>
@@ -40,7 +43,7 @@
   <File Type="ROUTE-METHODOLOGY-DRC" Name="TopModule_methodology_drc_routed.rpt"/>
   <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="TopModule_methodology_drc_routed.rpx"/>
   <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="TopModule_methodology_drc_routed.pb"/>
-  <File Type="ROUTE-PWR-RPX" Name="TopModule_power_routed.rpx"/>
+  <File Type="ROUTE-RQS-PB" Name="TopModule_rqs_routed.pb"/>
   <File Type="ROUTE-STATUS" Name="TopModule_route_status.rpt"/>
   <File Type="ROUTE-STATUS-PB" Name="TopModule_route_status.pb"/>
   <File Type="ROUTE-TIMINGSUMMARY" Name="TopModule_timing_summary_routed.rpt"/>
@@ -63,6 +66,8 @@
   <File Type="BITSTR-NKY" Name="TopModule.nky"/>
   <File Type="BITSTR-BMM" Name="TopModule_bd.bmm"/>
   <File Type="PDI-FILE" Name="TopModule.pdi"/>
+  <File Type="BOOT-PDI-FILE" Name="TopModule_soc.pdi"/>
+  <File Type="PL-PDI-FILE" Name="TopModule_pld.pdi"/>
   <File Type="RCFI_FILE" Name="TopModule.rcfi"/>
   <File Type="CFI_FILE" Name="TopModule.cfi"/>
   <File Type="RNPI_FILE" Name="TopModule.rnpi"/>
@@ -116,15 +121,7 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/sources_1/new/OutputLogic.v">
-      <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PSRCDIR/sources_1/new/NextStateLogic.v">
+    <File Path="$PSRCDIR/sources_1/new/PWM.v">
       <FileInfo>
         <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
@@ -138,7 +135,7 @@
       <Option Name="TopAutoSet" Val="TRUE"/>
     </Config>
   </FileSet>
-  <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">
+  <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1" RelGenDir="$PGENDIR/constrs_1">
     <Filter Type="Constrs"/>
     <File Path="$PSRCDIR/constrs_1/new/constraints.xdc">
       <FileInfo>
@@ -150,7 +147,7 @@
       <Option Name="ConstrsType" Val="XDC"/>
     </Config>
   </FileSet>
-  <FileSet Name="utils" Type="Utils" RelSrcDir="$PSRCDIR/utils_1">
+  <FileSet Name="utils" Type="Utils" RelSrcDir="$PSRCDIR/utils_1" RelGenDir="$PGENDIR/utils_1">
     <Filter Type="Utils"/>
     <File Path="$PSRCDIR/utils_1/imports/synth_1/TopModule.dcp">
       <FileInfo>
@@ -165,9 +162,7 @@
     </Config>
   </FileSet>
   <Strategy Version="1" Minor="2">
-    <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2022">
-      <Desc>Default settings for Implementation.</Desc>
-    </StratHandle>
+    <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2022"/>
     <Step Id="init_design"/>
     <Step Id="opt_design"/>
     <Step Id="power_opt_design"/>

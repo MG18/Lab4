@@ -22,7 +22,7 @@
 
 module TopModule(input left, input right, input reset, input clk, output RA, RB, RC, LA,LB, LC);
     
-    wire clk_wire, next_state;
-    clk_div(clk, reset, clk_wire);
-    StateRegister(clk_wire, next_state, left,  right, reset, next_state, RA, RB, RC, LA,LB, LC);
+    wire clkdiv_wire, next_state;
+    clk_div(clk, reset, clkdiv_wire);
+    StateRegister(clkdiv_wire, clk, next_state, left,  right, reset, next_state, RA, RB, RC, LA,LB, LC);
 endmodule
