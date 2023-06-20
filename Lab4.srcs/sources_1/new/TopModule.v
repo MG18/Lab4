@@ -20,9 +20,16 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module TopModule(input left, input right, input reset, input clk, output RA, RB, RC, LA,LB, LC);
+module TopModule(input left, input right, input reset, input clk, input clk2, output RA, RB, RC, LA,LB, LC);
+    /*Pwm(clk2, 4'b0100, reset, RA);
+    Pwm(clk2, 4'b1100, reset, RB);
+    Pwm(clk2, 4'b1111, reset, RC); 
+    
+    Pwm(clk2, 4'b0100, reset, LA);
+    Pwm(clk2, 4'b1100, reset, LB);
+    Pwm(clk2, 4'b1111, reset, LC); */
     
     wire clkdiv_wire, next_state;
-    clk_div(clk, reset, clkdiv_wire);
+   clk_div(clk, reset, clkdiv_wire);
     StateRegister(clkdiv_wire, clk, next_state, left,  right, reset, next_state, RA, RB, RC, LA,LB, LC);
 endmodule

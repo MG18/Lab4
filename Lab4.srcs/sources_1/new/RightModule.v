@@ -23,8 +23,17 @@
 module RightModule(input clkdiv,input clkpwm,  input [1:0] state_n, input right, input reset, output [1:0] state_p,output RA,output RB,output RC);
 
 reg[1:0] state;
-reg RA_w,RB_w,RC_w;
-wire pwmwire;
+reg [3:0] RA_w = 4'b0;
+reg [3:0] RB_w = 4'b0;
+reg [3:0] RC_w = 4'b0;
+wire wire_a, wire_b, wire_c;
+//reg[3:0] brightness;
+
+
+
+    Pwm(clkpwm, RA_w, RA);
+    Pwm(clkpwm, RB_w, RB);
+    //Pwm(clkpwm, RC_w, RC); 
 
 
 always @(posedge clkdiv, posedge reset)
@@ -57,28 +66,31 @@ begin
            RC_w <= 0; 
            end 
      2'b01: begin
-           Pwm(clkpwm, 3, reset, pwmwire);
-           RA_w <= pwmwire;
+           //Pwm(clkpwm, 4'b0001, reset, pwmwire);
+           //brightness <= 4'b0001;
+           RA_w <= 4'b0100;
            RB_w <= 0; 
            RC_w <= 0; 
            end 
      2'b10: begin
-           Pwm(clkpwm, 2, reset, pwmwire);
-           RA_w <= pwmwire;
-           RB_w <= pwmwire; 
+           //Pwm(clkpwm, 4'b0100, reset, pwmwire);
+           //brightness <= 4'b0100;
+           RA_w <= 4'b0100;
+           RB_w <= 4'b1100; 
            RC_w <= 0; 
            end
      2'b11: begin
-           Pwm(clkpwm, 1, reset, pwmwire);
-           RA_w <= pwmwire;
-           RB_w <= pwmwire; 
-           RC_w <= pwmwire; 
+           //Pwm(clkpwm, 4'b1110, reset, pwmwire);
+           //brightness <= 4'b1110;
+           RA_w <= 4'b0100;
+           RB_w <= 4'b1100; 
+           RC_w <= 1; 
            end
            
     endcase
 end
-assign RA = RA_w;
-assign RB = RB_w;
+/*assign RA = RA_w;
+assign RB = RB_w;*/
 assign RC = RC_w;
 
 assign state_p = state;

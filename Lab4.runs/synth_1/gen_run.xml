@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1685540688" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/TopModule.dcp">
+<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1687295862" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/TopModule.dcp">
   <File Type="PA-TCL" Name="TopModule.tcl"/>
   <File Type="RDS-PROPCONSTRS" Name="TopModule_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="TopModule_reports.tcl"/>
@@ -12,6 +12,13 @@
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PSRCDIR/sources_1/new/LeftModule.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/PWM.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
@@ -41,14 +48,6 @@
     </File>
     <File Path="$PSRCDIR/sources_1/new/TopModule.v">
       <FileInfo>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PSRCDIR/sources_1/new/PWM.v">
-      <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
